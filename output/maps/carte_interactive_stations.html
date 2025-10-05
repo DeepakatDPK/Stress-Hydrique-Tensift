@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f7f44cee89f3923823c2a9c46cdef093 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 50px; left: 50px; width: 220px; height: auto; 
+                background-color: white; z-index: 9999; 
+                border: 2px solid grey; border-radius: 5px;
+                padding: 10px; font-family: Arial; font-size: 12px;">
+        <h4 style="margin-top: 0;">Niveau de Stress Hydrique</h4>
+        <p style="margin: 5px 0;">
+            <i class="fa fa-circle" style="color: green;"></i> Faible (0 périodes)<br>
+            <i class="fa fa-circle" style="color: lightgreen;"></i> Modéré (1-2 périodes)<br>
+            <i class="fa fa-circle" style="color: orange;"></i> Élevé (3-5 périodes)<br>
+            <i class="fa fa-circle" style="color: red;"></i> Très élevé (>5 périodes)<br>
+        </p>
+        <hr style="margin: 8px 0;">
+        <p style="margin: 5px 0; font-size: 10px;">
+            <b>Taille du marqueur</b> = Altitude<br>
+            Petit: <500m | Moyen: 500-1000m | Grand: >1000m
+        </p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_f7f44cee89f3923823c2a9c46cdef093" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_f7f44cee89f3923823c2a9c46cdef093 = L.map(
+                "map_f7f44cee89f3923823c2a9c46cdef093",
+                {
+                    center: [31.4, -8.2],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+            L.control.scale().addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+
+            
+
+        
+    
+            var tile_layer_1296cd8950069e8d2ccaad5fecce08d6 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_1296cd8950069e8d2ccaad5fecce08d6.addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var circle_marker_e9a7daedc6ec9fe7e86be5bf6ef11345 = L.circleMarker(
+                [31.455608081041376, -9.68215882457188],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_7969e3791ffdcbbe6141ec89cf648ac2 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_31a7793c0ab102cb45bab32b344d41d7 = $(`<div id="html_31a7793c0ab102cb45bab32b344d41d7" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">ADAMNA</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>50</td></tr>                     <tr><td><b>Altitude:</b></td><td>70 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.4556°N, -9.6822°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>23.9 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.239</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>31.8°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: green; font-weight: bold;">Faible</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>0 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 2</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_7969e3791ffdcbbe6141ec89cf648ac2.setContent(html_31a7793c0ab102cb45bab32b344d41d7);
+            
+        
+
+        circle_marker_e9a7daedc6ec9fe7e86be5bf6ef11345.bindPopup(popup_7969e3791ffdcbbe6141ec89cf648ac2)
+        ;
+
+        
+    
+    
+            circle_marker_e9a7daedc6ec9fe7e86be5bf6ef11345.bindTooltip(
+                `<div>
+                     ADAMNA (70m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8ed075d14c5f6fc94488e99676b21774 = L.marker(
+                [31.455608081041376, -9.68215882457188],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_e32d609a52424cffb6f709d747552acc = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    ADAMNA\n                \u003c/div\u003e\n            "});
+            marker_8ed075d14c5f6fc94488e99676b21774.setIcon(div_icon_e32d609a52424cffb6f709d747552acc);
+        
+    
+            var circle_marker_c2998102f366e0f5c70c8f043e43b4de = L.circleMarker(
+                [31.317928928745374, -7.749827414085375],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgreen", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_6681852ad1e06009f9b4eb95afef8b44 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_55f3e6aa7ea3cd9a0e36c2245e88b648 = $(`<div id="html_55f3e6aa7ea3cd9a0e36c2245e88b648" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">AGHBALOU</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>6193</td></tr>                     <tr><td><b>Altitude:</b></td><td>1070 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.3179°N, -7.7498°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>42.3 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.440</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>26.4°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: lightgreen; font-weight: bold;">Modéré</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>1 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 1</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_6681852ad1e06009f9b4eb95afef8b44.setContent(html_55f3e6aa7ea3cd9a0e36c2245e88b648);
+            
+        
+
+        circle_marker_c2998102f366e0f5c70c8f043e43b4de.bindPopup(popup_6681852ad1e06009f9b4eb95afef8b44)
+        ;
+
+        
+    
+    
+            circle_marker_c2998102f366e0f5c70c8f043e43b4de.bindTooltip(
+                `<div>
+                     AGHBALOU (1070m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_61c05d3c4fda147687edc5436df49a6c = L.marker(
+                [31.317928928745374, -7.749827414085375],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_a2a930abdc759e04e416229a2b3b28db = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    AGHBALOU\n                \u003c/div\u003e\n            "});
+            marker_61c05d3c4fda147687edc5436df49a6c.setIcon(div_icon_a2a930abdc759e04e416229a2b3b28db);
+        
+    
+            var circle_marker_33f68b6be293386c0e4e43627582e15d = L.circleMarker(
+                [31.196170040550122, -7.795949259312987],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgreen", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_afe95e3ef51b2bbacb231e652fbcbb77 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_6a374c735fad2f39ef3e44bb10b507c5 = $(`<div id="html_6a374c735fad2f39ef3e44bb10b507c5" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">AGOUNS</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>902</td></tr>                     <tr><td><b>Altitude:</b></td><td>2200 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.1962°N, -7.7959°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>33.5 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.156</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>20.7°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: lightgreen; font-weight: bold;">Modéré</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>1 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 3</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_afe95e3ef51b2bbacb231e652fbcbb77.setContent(html_6a374c735fad2f39ef3e44bb10b507c5);
+            
+        
+
+        circle_marker_33f68b6be293386c0e4e43627582e15d.bindPopup(popup_afe95e3ef51b2bbacb231e652fbcbb77)
+        ;
+
+        
+    
+    
+            circle_marker_33f68b6be293386c0e4e43627582e15d.bindTooltip(
+                `<div>
+                     AGOUNS (2200m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1f9ee98ffcf451a83192ca513ad28ab3 = L.marker(
+                [31.196170040550122, -7.795949259312987],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_d26e594cddeca67ef47c862a900ea307 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    AGOUNS\n                \u003c/div\u003e\n            "});
+            marker_1f9ee98ffcf451a83192ca513ad28ab3.setIcon(div_icon_d26e594cddeca67ef47c862a900ea307);
+        
+    
+            var circle_marker_32158dd7c10fa654a3213e810af58036 = L.circleMarker(
+                [31.17546544993046, -7.724382967151671],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_078d9a570836e5b59f947d0de5b3c6b3 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_bb741cb63194b44a950c662dd5c489b8 = $(`<div id="html_bb741cb63194b44a950c662dd5c489b8" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">AMENZAL</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>1004</td></tr>                     <tr><td><b>Altitude:</b></td><td>2230 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.1755°N, -7.7244°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>26.8 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.144</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>19.7°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: green; font-weight: bold;">Faible</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>0 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 3</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_078d9a570836e5b59f947d0de5b3c6b3.setContent(html_bb741cb63194b44a950c662dd5c489b8);
+            
+        
+
+        circle_marker_32158dd7c10fa654a3213e810af58036.bindPopup(popup_078d9a570836e5b59f947d0de5b3c6b3)
+        ;
+
+        
+    
+    
+            circle_marker_32158dd7c10fa654a3213e810af58036.bindTooltip(
+                `<div>
+                     AMENZAL (2230m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d2e01c4a0465b393cd81c65880b3c3c3 = L.marker(
+                [31.17546544993046, -7.724382967151671],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_76adc9b33836cb99af013572a94f3553 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    AMENZAL\n                \u003c/div\u003e\n            "});
+            marker_d2e01c4a0465b393cd81c65880b3c3c3.setIcon(div_icon_76adc9b33836cb99af013572a94f3553);
+        
+    
+            var circle_marker_067561a89d8cf90d323a677e79585ada = L.circleMarker(
+                [31.191278365153863, -8.240150089527972],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_0d731e2c71ebe5ef6f65bb22e162a98a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_a9d659168b7dda4e92379e953bb924ab = $(`<div id="html_a9d659168b7dda4e92379e953bb924ab" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">SIDI_HSSAIN_AMEZMEZ</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>6826</td></tr>                     <tr><td><b>Altitude:</b></td><td>1030 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.1913°N, -8.2402°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>30.0 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.337</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>27.4°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: orange; font-weight: bold;">Élevé</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>3 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 1</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_0d731e2c71ebe5ef6f65bb22e162a98a.setContent(html_a9d659168b7dda4e92379e953bb924ab);
+            
+        
+
+        circle_marker_067561a89d8cf90d323a677e79585ada.bindPopup(popup_0d731e2c71ebe5ef6f65bb22e162a98a)
+        ;
+
+        
+    
+    
+            circle_marker_067561a89d8cf90d323a677e79585ada.bindTooltip(
+                `<div>
+                     SIDI_HSSAIN_AMEZMEZ (1030m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4be8235d592c23c3e5d82f2813c5597c = L.marker(
+                [31.191278365153863, -8.240150089527972],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_3fcd04db13cd7a311cc303ac1e184717 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    SIDI_HSSAIN_AMEZMEZ\n                \u003c/div\u003e\n            "});
+            marker_4be8235d592c23c3e5d82f2813c5597c.setIcon(div_icon_3fcd04db13cd7a311cc303ac1e184717);
+        
+    
+            var circle_marker_4ecd44790eaca0a9cd439be6a41acc28 = L.circleMarker(
+                [31.54837242639547, -8.75265978529348],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_4d88d4f3c0663e22894bc4b753e175e4 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_4999227425d70957947654757cfcefec = $(`<div id="html_4999227425d70957947654757cfcefec" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">CHICHAOUA</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>2601</td></tr>                     <tr><td><b>Altitude:</b></td><td>340 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.5484°N, -8.7527°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>12.2 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.141</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>32.9°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: green; font-weight: bold;">Faible</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>0 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 2</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_4d88d4f3c0663e22894bc4b753e175e4.setContent(html_4999227425d70957947654757cfcefec);
+            
+        
+
+        circle_marker_4ecd44790eaca0a9cd439be6a41acc28.bindPopup(popup_4d88d4f3c0663e22894bc4b753e175e4)
+        ;
+
+        
+    
+    
+            circle_marker_4ecd44790eaca0a9cd439be6a41acc28.bindTooltip(
+                `<div>
+                     CHICHAOUA (340m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_562a48ea03bb3fcb038918330bd9e756 = L.marker(
+                [31.54837242639547, -8.75265978529348],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_09a2da2fdb53025af386fae26a2f67f2 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    CHICHAOUA\n                \u003c/div\u003e\n            "});
+            marker_562a48ea03bb3fcb038918330bd9e756.setIcon(div_icon_09a2da2fdb53025af386fae26a2f67f2);
+        
+    
+            var circle_marker_e99f4bc98e2d8397c8456ce576fd8eeb = L.circleMarker(
+                [31.18029064966771, -8.794303821297905],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgreen", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_fc1d7fadb013970017d6373a369a638f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2f8c2583ca5f0a777952cbb876d883eb = $(`<div id="html_2f8c2583ca5f0a777952cbb876d883eb" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">ILOUDJANE</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>4222</td></tr>                     <tr><td><b>Altitude:</b></td><td>757 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.1803°N, -8.7943°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>25.3 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.211</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>30.5°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: lightgreen; font-weight: bold;">Modéré</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>1 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 2</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_fc1d7fadb013970017d6373a369a638f.setContent(html_2f8c2583ca5f0a777952cbb876d883eb);
+            
+        
+
+        circle_marker_e99f4bc98e2d8397c8456ce576fd8eeb.bindPopup(popup_fc1d7fadb013970017d6373a369a638f)
+        ;
+
+        
+    
+    
+            circle_marker_e99f4bc98e2d8397c8456ce576fd8eeb.bindTooltip(
+                `<div>
+                     ILOUDJANE (757m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f23cd8d4e8f0a0820bd129b70ddf1715 = L.marker(
+                [31.18029064966771, -8.794303821297905],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_137e59f772d2e48bba63c626ac437022 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    ILOUDJANE\n                \u003c/div\u003e\n            "});
+            marker_f23cd8d4e8f0a0820bd129b70ddf1715.setIcon(div_icon_137e59f772d2e48bba63c626ac437022);
+        
+    
+            var circle_marker_74dc9a498881e795bab7ae050fc4bd7d = L.circleMarker(
+                [31.555256643482767, -8.031541812968252],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgreen", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_8a0501a879e96f64df86312c1f9d4312 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_be1c29be1569241909d15985c33bdfd1 = $(`<div id="html_be1c29be1569241909d15985c33bdfd1" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">MARRAKECH</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>5229</td></tr>                     <tr><td><b>Altitude:</b></td><td>460 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.5553°N, -8.0315°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>17.8 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.193</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>33.4°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: lightgreen; font-weight: bold;">Modéré</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>1 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 2</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_8a0501a879e96f64df86312c1f9d4312.setContent(html_be1c29be1569241909d15985c33bdfd1);
+            
+        
+
+        circle_marker_74dc9a498881e795bab7ae050fc4bd7d.bindPopup(popup_8a0501a879e96f64df86312c1f9d4312)
+        ;
+
+        
+    
+    
+            circle_marker_74dc9a498881e795bab7ae050fc4bd7d.bindTooltip(
+                `<div>
+                     MARRAKECH (460m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_b28d4b12ede410895e15aac12c2823c2 = L.marker(
+                [31.555256643482767, -8.031541812968252],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_151d475c80e97cdf96b3b8745c116023 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    MARRAKECH\n                \u003c/div\u003e\n            "});
+            marker_b28d4b12ede410895e15aac12c2823c2.setIcon(div_icon_151d475c80e97cdf96b3b8745c116023);
+        
+    
+            var circle_marker_a660f4f06716b710fc8fa59669d3ddf0 = L.circleMarker(
+                [31.289743592574215, -7.961774244562123],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgreen", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_43fd00bd6b3cb0fca22a21ee8bba939b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_dee3bbf307692cfade23fef824c5b666 = $(`<div id="html_dee3bbf307692cfade23fef824c5b666" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">TAHANAOUT_RERAYA</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>7512</td></tr>                     <tr><td><b>Altitude:</b></td><td>925 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.2897°N, -7.9618°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>nan mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.330</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>29.2°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: lightgreen; font-weight: bold;">Modéré</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>2 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 1</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_43fd00bd6b3cb0fca22a21ee8bba939b.setContent(html_dee3bbf307692cfade23fef824c5b666);
+            
+        
+
+        circle_marker_a660f4f06716b710fc8fa59669d3ddf0.bindPopup(popup_43fd00bd6b3cb0fca22a21ee8bba939b)
+        ;
+
+        
+    
+    
+            circle_marker_a660f4f06716b710fc8fa59669d3ddf0.bindTooltip(
+                `<div>
+                     TAHANAOUT_RERAYA (925m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a220ad2f693da9093a3b76db694a558c = L.marker(
+                [31.289743592574215, -7.961774244562123],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_de1c76fe08d0bfa24848aa59bf4e54d1 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    TAHANAOUT_RERAYA\n                \u003c/div\u003e\n            "});
+            marker_a220ad2f693da9093a3b76db694a558c.setIcon(div_icon_de1c76fe08d0bfa24848aa59bf4e54d1);
+        
+    
+            var circle_marker_7e6d57d4a1feefa48c51574de2dcd44a = L.circleMarker(
+                [31.22349203006049, -8.447952152016606],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "gray", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_2d4c9988d5ef4e2ff336d62fe36d077f = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_0288a226f194001769a8b6c617b489aa = $(`<div id="html_0288a226f194001769a8b6c617b489aa" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 250px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">SIDI_BOUATHMANE</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>6770</td></tr>                     <tr><td><b>Altitude:</b></td><td>820 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.2235°N, -8.4480°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td colspan="2"><i>Données en cours d'analyse</i></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_2d4c9988d5ef4e2ff336d62fe36d077f.setContent(html_0288a226f194001769a8b6c617b489aa);
+            
+        
+
+        circle_marker_7e6d57d4a1feefa48c51574de2dcd44a.bindPopup(popup_2d4c9988d5ef4e2ff336d62fe36d077f)
+        ;
+
+        
+    
+    
+            circle_marker_7e6d57d4a1feefa48c51574de2dcd44a.bindTooltip(
+                `<div>
+                     SIDI_BOUATHMANE (820m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8298ea98c76c6f5dffb8d3eebb494177 = L.marker(
+                [31.22349203006049, -8.447952152016606],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_3bc1322e17e802376b0e464e84578f5a = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    SIDI_BOUATHMANE\n                \u003c/div\u003e\n            "});
+            marker_8298ea98c76c6f5dffb8d3eebb494177.setIcon(div_icon_3bc1322e17e802376b0e464e84578f5a);
+        
+    
+            var circle_marker_9d8b07668ad36ec1413d466048aa9fe3 = L.circleMarker(
+                [31.541322289927948, -7.596666424405495],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "lightgreen", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_a62321f4241d72e425fb4c8aba88144b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3b15ea62368f105eef267fa177563554 = $(`<div id="html_3b15ea62368f105eef267fa177563554" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">TAFERIAT</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>7352</td></tr>                     <tr><td><b>Altitude:</b></td><td>760 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.5413°N, -7.5967°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>27.6 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.278</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>31.4°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: lightgreen; font-weight: bold;">Modéré</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>1 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 1</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_a62321f4241d72e425fb4c8aba88144b.setContent(html_3b15ea62368f105eef267fa177563554);
+            
+        
+
+        circle_marker_9d8b07668ad36ec1413d466048aa9fe3.bindPopup(popup_a62321f4241d72e425fb4c8aba88144b)
+        ;
+
+        
+    
+    
+            circle_marker_9d8b07668ad36ec1413d466048aa9fe3.bindTooltip(
+                `<div>
+                     TAFERIAT (760m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_812037fbb89addbd52cb6db14459fc2c = L.marker(
+                [31.541322289927948, -7.596666424405495],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_b958b2312bf91f4c10e6f6bdc1ad2b98 = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    TAFERIAT\n                \u003c/div\u003e\n            "});
+            marker_812037fbb89addbd52cb6db14459fc2c.setIcon(div_icon_b958b2312bf91f4c10e6f6bdc1ad2b98);
+        
+    
+            var circle_marker_351dac9c43e36c3b18b27e112c7daed9 = L.circleMarker(
+                [31.239816497646846, -7.635464388748267],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 2}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+        var popup_ee256efabcf44c66e610b0c365ff90bd = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_afb792257b8f2a5f9c7301abcbc03d90 = $(`<div id="html_afb792257b8f2a5f9c7301abcbc03d90" style="width: 100.0%; height: 100.0%;">             <div style="font-family: Arial; width: 280px;">                 <h4 style="margin-bottom: 10px; color: #2c3e50;">TTOURCHT</h4>                 <hr style="margin: 5px 0;">                 <table style="width: 100%; font-size: 12px;">                     <tr><td><b>ID:</b></td><td>8804</td></tr>                     <tr><td><b>Altitude:</b></td><td>1650 m</td></tr>                     <tr><td><b>Coordonnées:</b></td><td>31.2398°N, -7.6355°W</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr><td><b>Précip. moy:</b></td><td>39.5 mm/mois</td></tr>                     <tr><td><b>NDVI moyen:</b></td><td>0.229</td></tr>                     <tr><td><b>Temp. moy:</b></td><td>22.0°C</td></tr>                     <tr><td colspan="2"><hr style="margin: 5px 0;"></td></tr>                     <tr>                         <td><b>Stress:</b></td>                         <td style="color: green; font-weight: bold;">Faible</td>                     </tr>                     <tr><td><b>Périodes:</b></td><td>0 mois</td></tr>                     <tr><td><b>Cluster:</b></td><td>Groupe 3</td></tr>                 </table>             </div>             </div>`)[0];
+                popup_ee256efabcf44c66e610b0c365ff90bd.setContent(html_afb792257b8f2a5f9c7301abcbc03d90);
+            
+        
+
+        circle_marker_351dac9c43e36c3b18b27e112c7daed9.bindPopup(popup_ee256efabcf44c66e610b0c365ff90bd)
+        ;
+
+        
+    
+    
+            circle_marker_351dac9c43e36c3b18b27e112c7daed9.bindTooltip(
+                `<div>
+                     TTOURCHT (1650m)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_246790c7f7761ca15b9ca4d11fd71fbd = L.marker(
+                [31.239816497646846, -7.635464388748267],
+                {}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+        
+    
+            var div_icon_3413bc1fafd46fb24a1af16bba75203e = L.divIcon({"className": "empty", "html": "\n                \u003cdiv style=\"font-size: 9px; font-weight: bold; \n                     color: white; text-shadow: 1px 1px 2px black;\n                     white-space: nowrap;\"\u003e\n                    TTOURCHT\n                \u003c/div\u003e\n            "});
+            marker_246790c7f7761ca15b9ca4d11fd71fbd.setIcon(div_icon_3413bc1fafd46fb24a1af16bba75203e);
+        
+    
+            var layer_control_ce1c9004aa1e95707c3814b3d0574dfd_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_1296cd8950069e8d2ccaad5fecce08d6,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_ce1c9004aa1e95707c3814b3d0574dfd = L.control.layers(
+                layer_control_ce1c9004aa1e95707c3814b3d0574dfd_layers.base_layers,
+                layer_control_ce1c9004aa1e95707c3814b3d0574dfd_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_f7f44cee89f3923823c2a9c46cdef093);
+
+        
+    
+            var measure_control_3a7cfa1849b3f69b84ec100149e8195e = new L.Control.Measure(
+                {"position": "topleft", "primaryAreaUnit": "sqmeters", "primaryLengthUnit": "kilometers", "secondaryAreaUnit": "acres", "secondaryLengthUnit": "miles"});
+            map_f7f44cee89f3923823c2a9c46cdef093.addControl(measure_control_3a7cfa1849b3f69b84ec100149e8195e);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var tile_layer_bbdd615a2464e75140e253ffca4ddd2e = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_598d51e11f5b393e080cc10798fce2a7 = new L.Control.MiniMap(
+                tile_layer_bbdd615a2464e75140e253ffca4ddd2e,
+                {"autoToggleDisplay": false, "centerFixed": false, "collapsedHeight": 25, "collapsedWidth": 25, "height": 150, "minimized": false, "position": "bottomright", "toggleDisplay": true, "width": 150, "zoomAnimation": false, "zoomLevelOffset": -5}
+            );
+            map_f7f44cee89f3923823c2a9c46cdef093.addControl(mini_map_598d51e11f5b393e080cc10798fce2a7);
+        
+</script>
+</html>
