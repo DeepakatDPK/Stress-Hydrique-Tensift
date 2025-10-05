@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Données sensibles
+data/
+*.xlsx
+*.csv
+*.xls
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Google Earth Engine credentials
+.config/
+credentials.json
+
+# Logs
+*.log
