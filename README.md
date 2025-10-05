@@ -1,5 +1,16 @@
 # 🌍 Détection du Stress Hydrique Agricole - Bassin du Tensift
 
+<div align="center">
+  <img src="output/maps/Carte_interactive.png" alt="Carte Interactive du Bassin du Tensift" width="800"/>
+  <p><em>Distribution spatiale des stations et niveaux de stress hydrique dans le bassin du Tensift</em></p>
+</div>
+
+[![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/)
+[![GEE](https://img.shields.io/badge/Google_Earth_Engine-API-green.svg)](https://earthengine.google.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
 ## 📋 Table des Matières
 - [Vue d'Ensemble](#vue-densemble)
 - [Contexte du Projet](#contexte-du-projet)
