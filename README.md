@@ -28,8 +28,6 @@
 
 ## 🎯 Vue d'Ensemble
 
-**Badge :** [![Python](3.12+)] [![GEE](API)] [![Status](Completed)]
-
 Pipeline complet de Data Science géospatiale pour la détection précoce du stress hydrique agricole par télédétection satellitaire. Combine données Sentinel-2, MODIS et mesures pluviométriques in-situ sur 12 stations du bassin du Tensift (Maroc).
 
 **Période d'analyse :** 2015-2019 (5 ans)  
